@@ -11,20 +11,20 @@ TextTheme getTextTheme(ColorScheme colorScheme) {
     displayMedium: primaryFont.copyWith(color: colorScheme.primary),
     displaySmall: primaryFont.copyWith(color: colorScheme.primary),
 
-    headlineLarge: primaryFont.copyWith(),
-    headlineMedium: primaryFont.copyWith(),
-    headlineSmall: primaryFont.copyWith(),
+    headlineLarge: primaryFont.copyWith(color: colorScheme.onBackground),
+    headlineMedium: primaryFont.copyWith(color: colorScheme.onBackground),
+    headlineSmall: primaryFont.copyWith(color: colorScheme.onBackground),
 
-    labelLarge: primaryFont.copyWith(),
-    labelMedium: primaryFont.copyWith(),
-    labelSmall: primaryFont.copyWith(),
+    labelLarge: primaryFont.copyWith(color: colorScheme.onBackground),
+    labelMedium: primaryFont.copyWith(color: colorScheme.onBackground),
+    labelSmall: primaryFont.copyWith(color: colorScheme.onBackground),
 
     titleLarge: primaryFont.copyWith(color: colorScheme.onPrimaryContainer),
     titleMedium: primaryFont.copyWith(color: colorScheme.onPrimaryContainer),
     titleSmall: primaryFont.copyWith(color: colorScheme.onPrimaryContainer),
 
-    bodyLarge: primaryFont.copyWith(color: colorScheme.onPrimaryContainer),
-    bodyMedium: primaryFont.copyWith(color: colorScheme.onPrimaryContainer),
-    bodySmall: primaryFont.copyWith(color: colorScheme.onPrimaryContainer),
+    bodyLarge: primaryFont.copyWith(color: colorScheme.onBackground),
+    bodyMedium: primaryFont.copyWith(color: colorScheme.onBackground),
+    bodySmall: primaryFont.copyWith(color: colorScheme.onBackground),
   );
 }

@@ -44,8 +44,6 @@ class StoreView extends StatefulWidget {
     super.key,
   });
 
-  static const routeName = '/';
-
   @override
   State<StoreView> createState() => _StoreViewState();
 }
@@ -67,19 +65,22 @@ class _StoreViewState extends State<StoreView> {
   @override
   Widget build(BuildContext context) {
     void fabAdd() {
-      showModalBottomSheet(
+     showModalBottomSheet(
           context: context,
           useSafeArea: true,
           showDragHandle: true,
           shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(topLeft: Radius.circular(24), topRight: Radius.circular(24))
-          ),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(24), topRight: Radius.circular(24))),
           builder: (context) {
             return Wrap(
               children: [
                 ListTile(
                   leading: const Icon(Icons.store),
-                  title: const Badge(label: Text('Premium'), offset: Offset(-75, 0), child: Text('Add store')),
+                  title: const Badge(
+                      label: Text('Premium'),
+                      offset: Offset(-75, 0),
+                      child: Text('Add store')),
                   onTap: () => print('add store'),
                 ),
                 ListTile(
@@ -97,18 +98,69 @@ class _StoreViewState extends State<StoreView> {
           });
     }
 
+    Future<void> showD(BuildContext context) async {
+      print('show d');
+      await showDialog(
+                context: context,
+                builder: (context) => Dialog(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const Text('This is a typical dialog.'),
+                      const SizedBox(height: 15),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Close'),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+    }
+
     return SafeArea(
       child: DefaultTabController(
         initialIndex: 0,
         length: aisles.length,
         child: Scaffold(
+          resizeToAvoidBottomInset: false,
           appBar: AppBar(
             title: const Text('Kyle HEB'),
             actions: [
-              IconButton(
-                onPressed: () => print('share'),
-                icon: const Icon(Icons.share),
-                tooltip: 'Share this list',
+                            IconButton(
+                onPressed: () => showD(context),
+                icon: const Icon(Icons.edit_document),
+                tooltip: 'View and edit account',
+              ),
+              PopupMenuButton<ListTile>(
+                itemBuilder: (theContext) => <PopupMenuEntry<ListTile>>[
+                  PopupMenuItem<ListTile>(
+                    onTap: () => print('share list'),
+                    child: const ListTile(
+                      leading: Icon(Icons.share),
+                      title: Text('Share list'),
+                      trailing: Icon(Icons.group),
+                    ),
+                  ),
+                  PopupMenuItem<ListTile>(
+                    onTap: () => print('edit store name'),
+                    child: const ListTile(
+                      leading: Icon(Icons.edit_document),
+                      title: Text('Edit store name'),
+                    ),
+                  ),
+                  PopupMenuItem<ListTile>(
+                    onTap: () => showD(theContext),
+                    child: const ListTile(
+                      leading: Icon(Icons.delete_forever),
+                      title: Text('Delete list'),
+                      
+                    ),
+                  ),
+                ],
               ),
               IconButton(
                 onPressed: () => print('account'),
@@ -135,22 +187,23 @@ class _StoreViewState extends State<StoreView> {
               if (snapshot.connectionState == ConnectionState.active) {
                 // On error, display error message
                 if (snapshot.hasError) {}
-    
+          
                 // On data, return stuff
                 // maybe add && snapshot.data!.docs.isNotEmpty
                 if (snapshot.hasData) {
                   return ListView.builder(
                     itemCount: 1,
                     itemBuilder: (BuildContext context, int index) {
-                      return ProductTile(product: aisles[index].products![index]);
+                      return ProductTile(
+                          product: aisles[index].products![index]);
                     },
                   );
                 }
-    
+          
                 // On no error and no data, display empty results
                 return const Text('Empty results');
               }
-    
+          
               // If stream is not complete, display loading
               return const CircularProgressIndicator();
             },
@@ -159,11 +212,6 @@ class _StoreViewState extends State<StoreView> {
             height: 75,
             child: Row(
               children: [
-                IconButton(
-                  onPressed: () => print('search'),
-                  icon: const Icon(Icons.search),
-                  tooltip: 'Search for a product across all aisles',
-                ),
                 IconButton(
                     onPressed: () => print('edit'),
                     icon: const Icon(Icons.edit),
@@ -179,7 +227,8 @@ class _StoreViewState extends State<StoreView> {
             )),
             onPressed: () => fabAdd(),
           ),
-          floatingActionButtonLocation: FloatingActionButtonLocation.endContained,
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.endContained,
         ),
       ),
     );

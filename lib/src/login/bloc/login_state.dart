@@ -19,9 +19,6 @@ class LoginState extends Equatable {
     this.errorMessage = '',
   });
 
-  @override
-  List<Object?> get props => [showLoader, pageType, email, password, confirmPassword, errorMessage];
-
   LoginState copyWith({
     bool? showLoader,
     PageType? pageType,
@@ -39,4 +36,8 @@ class LoginState extends Equatable {
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }
+
+  @override
+  List<Object?> get props =>
+      [showLoader, pageType, email, password, confirmPassword, errorMessage];
 }

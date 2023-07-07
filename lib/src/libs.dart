@@ -8,6 +8,7 @@ export 'package:flutter/material.dart';
 export '/src/app.dart';
 export '/src/auth/auth.dart';
 export '/src/login/login.dart';
+export '/src/product/product.dart';
 export '/src/router/router.dart';
 export '/src/store/store.dart';
 export '/src/style/style.dart';
