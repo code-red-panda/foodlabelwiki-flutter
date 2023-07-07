@@ -1,12 +1,88 @@
-import 'dart:async';
 import '/src/models/auth_user.dart';
-import '/src/exceptions.dart';
+import '/src/config/app_config.dart';
+import 'dart:async';
 import 'package:realm/realm.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
-//GOOGLE import 'package:google_sign_in/google_sign_in.dart';
-import 'package:meta/meta.dart';
 
-class AuthRepo {}
+class AuthRepo {
+  final App _app;
+  final StreamController<AuthUser> _controller;
+
+  AuthRepo({
+    App? app,
+    StreamController<AuthUser>? controller,
+  })  : _app = App(appConfig),
+        _controller = StreamController<AuthUser>();
+
+  /// Stream [AuthUser] which will emit the current user when
+  /// the AuthRepo state changes.
+  ///
+  /// Emits [AuthUser.empty] if the user is not authenticated.
+  Stream<AuthUser> get authUser => _controller.stream;
+
+  /// Signs up with the provided [email] and [password].
+  ///
+  /// Throws a [SignUpWithEmailAndPasswordFailure] if an exception occurs.
+  Future<void> signUpWithEmail({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      print('TRYING TO GET EMAIL AUTH PROVIDER $email $password');
+      await EmailPasswordAuthProvider(_app).registerUser(email, password);
+      print('GOT EMAIL AUTH PROVIDER');
+      signInWithEmail(email: email, password: password);
+
+    } on AppException catch (e) {
+      print('SIGN UP ERROR!!!!!!!!!!!!! ${e.message}');
+      throw Exception(e.message);
+    }
+  }
+
+  /// Signs in with the provided [email] and [password].
+  ///
+  /// Throws a [SignInWithEmailAndPasswordFailure] if an exception occurs.
+  Future<void> signInWithEmail({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      User _realmUser =
+          await _app.logIn(Credentials.emailPassword(email, password));
+      _controller.add(_realmUser.toAuthUser);
+    } on AppException catch (e) {
+      print('SIGN IN ERROR!!!!!!!!!!!!! ${e.message}');
+      throw Exception(e.message);
+    }
+  }
+
+  /// Signs out the current user which will emit
+  /// [AuthUser.empty] in the [AuthUser] stream.
+  ///
+  /// Throws a [SignOutFailure] if an exception occurs.
+  Future<void> signOut() async {
+    try {
+      if (_app.currentUser != null) {
+        await _app.currentUser?.logOut();
+        // Clears local data from device
+        await _app.removeUser(_app.currentUser!);
+        _controller.add(AuthUser.empty);
+      }
+    } on AppException catch (e) {
+      throw Exception(e.message);
+    }
+  }
+
+  void dispose() {
+    _controller.close();
+  }
+}
+
+/// Maps a Realm User to our AuthUser
+/// https://pub.dev/documentation/realm/latest/realm/User-class.html
+extension on User {
+  AuthUser get toAuthUser => AuthUser(id: id, email: profile.email ?? '');
+}
+
 /*
 class AuthRepo {
   final firebase_auth.FirebaseAuth _firebaseAuth;

@@ -4,13 +4,13 @@ TextStyle primaryFont = GoogleFonts.combo();
 TextStyle secondaryFont(TextStyle textStyle) => GoogleFonts.pacifico(textStyle: textStyle);
 
 final TextTheme textTheme = TextTheme(
-  displayLarge: primaryFont.copyWith(fontWeight: FontWeight.w100),
-  displayMedium: primaryFont.copyWith(fontWeight: FontWeight.w100),
-  displaySmall: primaryFont.copyWith(fontWeight: FontWeight.w100),
+  displayLarge: primaryFont.copyWith(),
+  displayMedium: primaryFont.copyWith(),
+  displaySmall: primaryFont.copyWith(),
 
-  headlineLarge: primaryFont.copyWith(fontWeight: FontWeight.w100),
-  headlineMedium: primaryFont.copyWith(fontWeight: FontWeight.w100),
-  headlineSmall: primaryFont.copyWith(fontWeight: FontWeight.w100),
+  headlineLarge: primaryFont.copyWith(),
+  headlineMedium: primaryFont.copyWith(),
+  headlineSmall: primaryFont.copyWith(),
 
   labelLarge: primaryFont.copyWith(),
   labelMedium: primaryFont.copyWith(),

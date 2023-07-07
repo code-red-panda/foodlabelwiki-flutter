@@ -14,14 +14,15 @@ class MyAppProvider extends StatelessWidget {
       value: _authRepo,
       child: BlocProvider(
         create: (_) => AuthBloc(authRepo: _authRepo),
-        child: const MyApp(),
+        child: MyApp(),
       ),
     );
   }
 }
 
+// ignore: must_be_immutable
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
 
   late GoRouter _router;
 

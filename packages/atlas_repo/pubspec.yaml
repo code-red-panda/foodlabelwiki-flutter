@@ -1,5 +1,5 @@
-name: realm_repo
-description: Dart package to manage the authentication and database domain with Realm.
+name: atlas_repo
+description: Dart package to manage the authentication and database domain.
 publish_to: 'none'
 
 version: 1.0.0+1

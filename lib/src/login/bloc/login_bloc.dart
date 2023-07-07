@@ -108,10 +108,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   ) async {
     try {
       emit(state.copyWith(showLoader: true));
-
-      await _authRepo.sendPasswordResetEmail(
-        email: state.email,
-      );
+      print('implement realm pw reset');
+      //await _authRepo.sendPasswordResetEmail(
+        //email: state.email,
+      //);
       emit(const LoginState());
     } on CustomException {
       emit(state.copyWith(

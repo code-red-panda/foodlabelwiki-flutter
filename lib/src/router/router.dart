@@ -1,34 +1,30 @@
-export '/src/libs.dart';
+import '/src/libs.dart';
 
 GoRouter createRouter(AuthBloc bloc) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: bloc,
-      errorBuilder: (context, state) => bloc.state.user.isEmpty
-          ? const LoginView()
-          : const NavBarView(),
+      errorBuilder: (context, state) =>
+          bloc.state.user.isEmpty ? const LoginProvider() : const StoreView(),
       routes: [
         RouteBuilder(
           label: '_initialize',
           path: '/',
           requireAuth: false,
-          view: bloc.state.user.isEmpty
-              ? const LoginView()
-              : const NavBarView(),
+          view: bloc.state.user.isEmpty ? const LoginProvider() : const StoreView(),
         ),
         const RouteBuilder(
           label: 'Login',
           path: '/login',
           requireAuth: false,
-          view: LoginView(),
+          view: LoginProvider(),
         ),
         const RouteBuilder(
-          label: 'Home',
-          path: '/home',
+          label: 'Store',
+          path: '/store',
           requireAuth: true,
-          view:  NavBarView(),
+          view: StoreView(),
         ),
-
       ].map((r) => r.toRoute(bloc)).toList(),
     );
 
@@ -58,11 +54,12 @@ class RouteBuilder {
 
             // User is logged in but on a page that does not require authentication. Redirect to home.
           } else if (!requireAuth && bloc.state.user.isNotEmpty) {
-            return '/home';
+            return '/store';
           }
           return null;
         },
-        pageBuilder: (context, state) => MaterialPage<void>(child: RootView(view: view)),
+        //pageBuilder: (context, state) => MaterialPage<void>(child: RootView(view: view)),
+        pageBuilder: (context, state) => MaterialPage<void>(child: view),
         routes: routes,
       );
 }

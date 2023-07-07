@@ -151,7 +151,7 @@ class LoginButton extends StatelessWidget {
           },
           //style: actionButton(context),
           child: state.showLoader
-              ? const LightCircularProgressIndicatory()
+              ? const CircularProgressIndicator()
               : const Text('Login'),
         );
       },
@@ -172,7 +172,7 @@ class SignupButton extends StatelessWidget {
           },
           //style: actionButton(context),
           child: state.showLoader
-              ? const LightCircularProgressIndicatory()
+              ? const CircularProgressIndicator()
               : Text(
                   'Signup',
                   style: Theme.of(context).textTheme.labelLarge,
