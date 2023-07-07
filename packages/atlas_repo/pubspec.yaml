@@ -1,0 +1,20 @@
+name: atlas_repo
+description: Dart package to manage the authentication and database domain.
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+    
+  equatable: ^2.0.5 # https://pub.dev/packages/equatable
+  realm: ^1.3.0 # https://pub.dev/packages/realm
+  #google_sign_in: ^6.1.3 # https://pub.dev/packages/google_sign_in
+  #sign_in_with_apple: ^4.3.0 # https://pub.dev/packages/sign_in_with_apple
+
+dev_dependencies:
+  very_good_analysis: ^5.0.0+1 # https://pub.dev/packages/very_good_analysis/install
