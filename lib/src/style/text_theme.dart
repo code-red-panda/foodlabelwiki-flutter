@@ -1,26 +1,30 @@
 import 'style.dart';
 
-TextStyle primaryFont = GoogleFonts.combo();
-TextStyle secondaryFont(TextStyle textStyle) => GoogleFonts.pacifico(textStyle: textStyle);
+TextStyle primaryFont = GoogleFonts.montaga();
 
-final TextTheme textTheme = TextTheme(
-  displayLarge: primaryFont.copyWith(),
-  displayMedium: primaryFont.copyWith(),
-  displaySmall: primaryFont.copyWith(),
+TextStyle secondaryFont(TextStyle textStyle) =>
+    GoogleFonts.pacifico(textStyle: textStyle);
 
-  headlineLarge: primaryFont.copyWith(),
-  headlineMedium: primaryFont.copyWith(),
-  headlineSmall: primaryFont.copyWith(),
+TextTheme getTextTheme(ColorScheme colorScheme) {
+  return TextTheme(
+    displayLarge: primaryFont.copyWith(color: colorScheme.primary),
+    displayMedium: primaryFont.copyWith(color: colorScheme.primary),
+    displaySmall: primaryFont.copyWith(color: colorScheme.primary),
 
-  labelLarge: primaryFont.copyWith(),
-  labelMedium: primaryFont.copyWith(),
-  labelSmall: primaryFont.copyWith(),
+    headlineLarge: primaryFont.copyWith(),
+    headlineMedium: primaryFont.copyWith(),
+    headlineSmall: primaryFont.copyWith(),
 
-  titleLarge: primaryFont.copyWith(),
-  titleMedium: primaryFont.copyWith(),
-  titleSmall: primaryFont.copyWith(),
+    labelLarge: primaryFont.copyWith(),
+    labelMedium: primaryFont.copyWith(),
+    labelSmall: primaryFont.copyWith(),
 
-  bodyLarge: primaryFont.copyWith(),
-  bodyMedium: primaryFont.copyWith(),
-  bodySmall: primaryFont.copyWith(),
-);
+    titleLarge: primaryFont.copyWith(color: colorScheme.onPrimaryContainer),
+    titleMedium: primaryFont.copyWith(color: colorScheme.onPrimaryContainer),
+    titleSmall: primaryFont.copyWith(color: colorScheme.onPrimaryContainer),
+
+    bodyLarge: primaryFont.copyWith(color: colorScheme.onPrimaryContainer),
+    bodyMedium: primaryFont.copyWith(color: colorScheme.onPrimaryContainer),
+    bodySmall: primaryFont.copyWith(color: colorScheme.onPrimaryContainer),
+  );
+}

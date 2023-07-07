@@ -6,7 +6,7 @@ class ThemeDataBuilder {
 
     return ThemeData.light().copyWith(
       colorScheme: colorScheme,
-      textTheme: textTheme,
+      textTheme: getTextTheme(colorScheme),
       useMaterial3: true,
     );
   }
@@ -16,7 +16,7 @@ class ThemeDataBuilder {
 
     return ThemeData.light().copyWith(
       colorScheme: colorScheme,
-      textTheme: textTheme,
+      textTheme: getTextTheme(colorScheme),
       useMaterial3: true,
     );
   }

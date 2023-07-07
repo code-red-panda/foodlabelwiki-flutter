@@ -12,6 +12,7 @@ class EmailTile extends StatelessWidget {
           contentPadding: EdgeInsets.zero,
           leading: const Icon(Icons.email),
           subtitle: TextField(
+            
             onChanged: (email) =>
                 context.read<LoginBloc>().add(EmailChanged(email)),
             decoration: InputDecoration(
